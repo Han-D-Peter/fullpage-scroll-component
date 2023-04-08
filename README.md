@@ -136,3 +136,4 @@ function App() {
   - `prev`: 이전페이지로 이동하는 함수입니다.
   - `move`: 특정페이지로 이동하는 함수입니다.
   - `resetCurrent`: 처음(디폴트 or 0번째)화면으로 돌아가는 함수입니다.
+# fullpage-scroll-component
