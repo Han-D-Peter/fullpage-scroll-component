@@ -1,46 +1,138 @@
-# Getting Started with Create React App
+# fullpage-scroll-component
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## **사용방법**
 
-## Available Scripts
+`fullpage-scroll-component`는 `StepScroll` 컴포넌트와 `useStepScroll` 훅 하나를 제공합니다.
 
-In the project directory, you can run:
+- `StepScroll` 컴포넌트는 스크롤 구역을 설정할 때 사용합니다. `StepScroll.Page`의 도움을 받습니다.
 
-### `npm start`
+```typescript
+function App() {
+  return (
+    <StepScroll>
+      <StepScroll.Page>
+        <FirstCustomComponent />
+      </StepScroll.Page>
+      <StepScroll.Page>
+        <SecondCustomComponent />
+      </StepScroll.Page>
+      <StepScroll.Page>
+        <ThirdCustomComponent />
+      </StepScroll.Page>
+    </StepScroll>
+  );
+}
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- `StepScroll`컴포넌트 하위에선 `useStepScroll` 훅을 통해 스크롤 조작이 가능합니다.
+- `useStepScroll`의 인자로 넣어주는 값은 아래와 같습니다.
+  - `defaultPage`: 처음 화면에 띄워줄 페이지 번호(0보다 작을 수 없고, 전체 길이보다 클 수 없습니다 -> 예외시 기본값 0)
+- `useStepScroll`이 반환하는 값은 아래와 같습니다.
+  - `currentPage`: 현재 화면에 보이는 페이지 번호.
+  - `resetCurrent`: 훅을 불러올때 입력했던 디폴트 페이지 번호로 초기화 합니다.
+  - `hasNextPage`: 다음 페이지의 존재 여부를 나타냅니다.
+  - `hasPrevPage`: 이전 페이지의 존재 여부를 나타냅니다.
+  - `nextPage`: 다음 페이지로 이동하는 함수입니다.
+  - `prevPage`: 이전 페이지로 이동하는 함수입니다.
+  - `movePage`: 넘어가고자 하는 페이지를 인자로 넣고 실행하면 해당 페이지로 이동합니다.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```typescript
+function FirstCustomComponent() {
+  const {
+    currentPage,
+    resetCurrent,
+    hasNextPage,
+    hasPrevPage,
+    nextPage,
+    prevPage,
+    movePage,
+  } = useStepScroll({ defaultPage: 0 });
+  return <div></div>;
+}
+```
 
-### `npm test`
+## **사용예시**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 컴포넌트 내부에서 사용
 
-### `npm run build`
+```typescript
+function FirstCustomComponent() {
+  const {
+    currentPage,
+    resetCurrent,
+    hasNextPage,
+    hasPrevPage,
+    nextPage,
+    prevPage,
+    movePage,
+  } = useStepScroll({ defaultPage: 0 });
+  return (
+    <div>
+      {hasPrevPage && <button onClick={prevPage}>Prev</button>} // 이전 페이지ㅣ
+      {hasNextPage && <button onClick={nextPage}>Next</button>}
+    </div>
+  );
+}
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- `StepScroll` 컴포넌트 하위 컴포넌트에서 `useStepScroll`을 통해 페이지를 이동하는 버튼을 만들 수 있습니다.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### ref 를 활용한 사용
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```typescript
+function App() {
+  const ref = useRef(null);
 
-### `npm run eject`
+  return (
+    <>
+      <StepScroll ref={ref}>
+        <StepScroll.Page>
+          <FirstCustomComponent />
+        </StepScroll.Page>
+        <StepScroll.Page>
+          <SecondCustomComponent />
+        </StepScroll.Page>
+        <StepScroll.Page>
+          <ThirdCustomComponent />
+        </StepScroll.Page>
+      </StepScroll>
+      <button
+        onClick={() => {
+          ref.current.next();
+        }}
+      >
+        다음페이지
+      </button>
+      <button
+        onClick={() => {
+          ref.current.next();
+        }}
+      >
+        이전페이지
+      </button>
+      <button
+        onClick={() => {
+          ref.current.move(2);
+        }}
+      >
+        2페이지로 이동
+      </button>
+      <button
+        onClick={() => {
+          ref.current.resetCurrent();
+        }}
+      >
+        처음화면으로
+      </button>
+    </>
+  );
+}
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- ref를 사용해 StepScroll 컴포넌트의 일부 동작을 조작할 수 있습니다.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+  - `current`: 현재 페이지를 나타냅니다.
+  - `next`: 다음페이지로 이동하는 함수입니다.
+  - `prev`: 이전페이지로 이동하는 함수입니다.
+  - `move`: 특정페이지로 이동하는 함수입니다.
+  - `resetCurrent`: 처음(디폴트 or 0번째)화면으로 돌아가는 함수입니다.

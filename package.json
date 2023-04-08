@@ -1,8 +1,28 @@
 {
   "name": "fullpage-scroll-component",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.0.5",
+  "author": {
+    "name": "Han-D-Peter",
+    "email": "jaesung.sound@gmail.com"
+  },
+  "description": "Stepped Scroll Component Library.",
+  "repository": {
+    "type": "git",
+    "url": "git://gitbub.com/Han-D-Peter/fullpage-scroll-component.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "Scroll",
+    "Step Scroll",
+    "Scroll Component"
+  ],
+  "private": false,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "browser": "./browser/specific/main.js",
   "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -10,6 +30,7 @@
     "@types/node": "^16.18.23",
     "@types/react": "^18.0.33",
     "@types/react-dom": "^18.0.11",
+    "lodash-es": "^4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
@@ -20,7 +41,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prepare": "rm -rf dist && mkdir dist && tsc"
   },
   "eslintConfig": {
     "extends": [
@@ -39,5 +61,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/lodash-es": "^4.17.7"
   }
 }
