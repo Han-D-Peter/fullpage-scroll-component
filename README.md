@@ -81,7 +81,7 @@ function FirstCustomComponent() {
 
 ```typescript
 function App() {
-  const ref = useRef(null);
+  const ref = useRef<HandleScroll>(null);
 
   return (
     <>
