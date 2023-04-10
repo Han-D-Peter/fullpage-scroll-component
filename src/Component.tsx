@@ -2,11 +2,11 @@ import React from "react";
 import { useStepScroll } from "./lib/StepScroll/hooks";
 
 export default function Component() {
-  const { nextPage, prevPage } = useStepScroll();
+  const { nextPage, prevPage, hasNextPage, hasPrevPage } = useStepScroll();
   return (
     <div>
-      <button onClick={() => prevPage()}>prev</button>
-      <button onClick={() => nextPage()}>next</button>
+      {hasPrevPage && <button onClick={() => prevPage()}>prev</button>}
+      {hasNextPage && <button onClick={() => nextPage()}>next</button>}
     </div>
   );
 }
