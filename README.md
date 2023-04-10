@@ -1,6 +1,6 @@
 # fullpage-scroll-component
 
-## **사용방법**
+## **사용방법([Example](https://dulcet-fairy-055d1f.netlify.app/))**
 
 `fullpage-scroll-component`는 `StepScroll` 컴포넌트와 `useStepScroll` 훅 하나를 제공합니다.
 
