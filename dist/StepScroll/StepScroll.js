@@ -10,18 +10,17 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { forwardRef, useMemo, useState, } from "react";
+import { forwardRef, useImperativeHandle, useMemo, useState, } from "react";
 import { useSuccessiveValue } from "./hooks/useSuccessiveValue";
 import { StepScrollContext } from "./hooks/useStepScroll";
-import Page from "./Page";
 import DebouncedScroll from "./DebouncedScroll";
-function StepScroll(_a, ref) {
-    var children = _a.children, defaultPage = _a.defaultPage;
-    var _b = useState([]), pagesIdArray = _b[0], setPagesIdArray = _b[1];
-    var _c = useSuccessiveValue({
+var StepScroll = forwardRef(function (_a, ref) {
+    var children = _a.children, _b = _a.defaultPage, defaultPage = _b === void 0 ? 0 : _b;
+    var _c = useState([]), pagesIdArray = _c[0], setPagesIdArray = _c[1];
+    var _d = useSuccessiveValue({
         maximum: children.length - 1,
         defaultNumber: defaultPage >= children.length ? 0 : defaultPage,
-    }), current = _c.current, setCurrent = _c.setCurrent, resetCurrent = _c.resetCurrent, next = _c.next, prev = _c.prev, hasNext = _c.hasNext, hasPrev = _c.hasPrev, move = _c.move;
+    }), current = _d.current, setCurrent = _d.setCurrent, resetCurrent = _d.resetCurrent, next = _d.next, prev = _d.prev, hasNext = _d.hasNext, hasPrev = _d.hasPrev, move = _d.move;
     var providerValues = useMemo(function () { return ({
         pagesIdArray: pagesIdArray,
         setPagesIdArray: setPagesIdArray,
@@ -45,7 +44,13 @@ function StepScroll(_a, ref) {
         prev,
         move,
     ]);
+    useImperativeHandle(ref, function () { return ({
+        currentPage: current,
+        nextPage: next,
+        prevPage: prev,
+        movePage: move,
+        resetCurrentPage: resetCurrent,
+    }); });
     return (_jsxs(StepScrollContext.Provider, __assign({ value: providerValues }, { children: [_jsx(DebouncedScroll, {}), children] })));
-}
-StepScroll.Page = Page;
-export default forwardRef(StepScroll);
+});
+export default StepScroll;

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import _ from "lodash-es";
-export default function useDebouncedScrollDirection(_a) {
+export function useDebouncedScrollDirection(_a) {
     var upScrollCallback = _a.upScrollCallback, downScrollCallback = _a.downScrollCallback, preventDefault = _a.preventDefault, _b = _a.debounceDelay, debounceDelay = _b === void 0 ? 1000 : _b;
     var _c = useState(""), scrollDir = _c[0], setScrollDir = _c[1];
     useEffect(function () {

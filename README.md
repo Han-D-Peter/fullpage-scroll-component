@@ -4,21 +4,21 @@
 
 `fullpage-scroll-component`는 `StepScroll` 컴포넌트와 `useStepScroll` 훅 하나를 제공합니다.
 
-- `StepScroll` 컴포넌트는 스크롤 구역을 설정할 때 사용합니다. `StepScroll.Page`의 도움을 받습니다.
+- `StepScroll` 컴포넌트는 스크롤 구역을 설정할 때 사용합니다. `Page`의 도움을 받습니다.
 
 ```typescript
 function App() {
   return (
     <StepScroll>
-      <StepScroll.Page>
+      <Page>
         <FirstCustomComponent />
-      </StepScroll.Page>
-      <StepScroll.Page>
+      </Page>
+      <Page>
         <SecondCustomComponent />
-      </StepScroll.Page>
-      <StepScroll.Page>
+      </Page>
+      <Page>
         <ThirdCustomComponent />
-      </StepScroll.Page>
+      </Page>
     </StepScroll>
   );
 }
@@ -131,9 +131,8 @@ function App() {
 
 - ref를 사용해 StepScroll 컴포넌트의 일부 동작을 조작할 수 있습니다.
 
-  - `current`: 현재 페이지를 나타냅니다.
-  - `next`: 다음페이지로 이동하는 함수입니다.
-  - `prev`: 이전페이지로 이동하는 함수입니다.
-  - `move`: 특정페이지로 이동하는 함수입니다.
-  - `resetCurrent`: 처음(디폴트 or 0번째)화면으로 돌아가는 함수입니다.
-# fullpage-scroll-component
+  - `currentPage`: 현재 페이지를 나타냅니다.
+  - `nextPage`: 다음페이지로 이동하는 함수입니다.
+  - `prevPage`: 이전페이지로 이동하는 함수입니다.
+  - `movePage`: 특정페이지로 이동하는 함수입니다.
+  - `resetCurrentPage`: 처음(디폴트 or 0번째)화면으로 돌아가는 함수입니다.

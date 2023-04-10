@@ -27,7 +27,7 @@ interface useDebouncedScrollDirection {
   debounceDelay?: number;
 }
 
-export default function useDebouncedScrollDirection({
+export function useDebouncedScrollDirection({
   upScrollCallback,
   downScrollCallback,
   preventDefault,

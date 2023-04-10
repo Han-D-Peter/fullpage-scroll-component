@@ -1,8 +1,8 @@
 import {
   ForwardedRef,
   ReactElement,
-  RefObject,
   forwardRef,
+  useImperativeHandle,
   useMemo,
   useState,
 } from "react";
@@ -13,41 +13,41 @@ import DebouncedScroll from "./DebouncedScroll";
 
 interface StepScrollProps {
   children: ReactElement<typeof Page>[];
-  defaultPage: number;
+  defaultPage?: number;
 }
 
 interface HandleScroll {
   /**
    * 현재 페이지 번호를 나타냅니다.
    */
-  readonly current: number;
+  readonly currentPage: number;
 
   /**
    * 다음페이지로 이동합니다.
    * 다음페이지가 존재하지 않는다면 동작하지 않습니다.
    */
-  readonly next: () => void;
+  readonly nextPage: () => void;
 
   /**
    * 이전페이지로 이동합니다.
    * 이전페이지가 존재하지 않는다면 동작하지 않습니다.
    */
-  readonly prev: () => void;
+  readonly prevPage: () => void;
 
   /**
    * 특정페이지로 이동합니다.
    * 없는 페이지라면 동작하지 않습니다.
    */
-  readonly move: (to: number) => void;
+  readonly movePage: (to: number) => void;
 
   /**
    * 처음페이지 or 디폴트 페이지로 이동합니다.
    */
-  readonly resetCurrent: () => void;
+  readonly resetCurrentPage: () => void;
 }
 
-function StepScroll(
-  { children, defaultPage }: StepScrollProps,
+const StepScroll = forwardRef(function (
+  { children, defaultPage = 0 }: StepScrollProps,
   ref: ForwardedRef<HandleScroll>
 ) {
   const [pagesIdArray, setPagesIdArray] = useState<string[]>([]);
@@ -92,14 +92,20 @@ function StepScroll(
     ]
   );
 
+  useImperativeHandle(ref, () => ({
+    currentPage: current,
+    nextPage: next,
+    prevPage: prev,
+    movePage: move,
+    resetCurrentPage: resetCurrent,
+  }));
+
   return (
     <StepScrollContext.Provider value={providerValues}>
       <DebouncedScroll />
       {children}
     </StepScrollContext.Provider>
   );
-}
+});
 
-StepScroll.Page = Page;
-
-export default forwardRef<HandleScroll, StepScrollProps>(StepScroll);
+export default StepScroll;
