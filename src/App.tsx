@@ -1,5 +1,4 @@
-import React, { useEffect, useRef } from "react";
-import Component from "./Component";
+import React, { useRef } from "react";
 import { StepScroll } from "./lib";
 import Page from "./lib/StepScroll/Page";
 import { HandleScroll } from "./lib/StepScroll/StepScroll";
