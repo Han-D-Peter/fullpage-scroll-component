@@ -7,7 +7,7 @@ import {
   useState,
 } from "react";
 
-interface useSuccessiveValue {
+interface useSuccessiveValueArgs {
   /**
    * 시작 숫자를 지정합니다.
    */
@@ -65,7 +65,7 @@ interface useSuccessiveValueReturnType {
 export const useSuccessiveValue = ({
   defaultNumber = 0,
   maximum,
-}: useSuccessiveValue): useSuccessiveValueReturnType => {
+}: useSuccessiveValueArgs): useSuccessiveValueReturnType => {
   const defaultCurrentNumberRef = useRef<number>(defaultNumber ?? 0);
   const [current, setCurrent] = useState(defaultCurrentNumberRef.current);
 
@@ -74,13 +74,15 @@ export const useSuccessiveValue = ({
   }, []);
 
   const next = useCallback(() => {
+    console.log("next");
     if (current >= maximum) {
       return;
     }
     setCurrent((prev) => ++prev);
-  }, [current]);
+  }, [current, maximum]);
 
   const prev = useCallback(() => {
+    console.log("prev");
     if (current <= 0) {
       return;
     }
@@ -89,7 +91,7 @@ export const useSuccessiveValue = ({
 
   const hasNext = useMemo(() => {
     return current < maximum;
-  }, [current]);
+  }, [current, maximum]);
 
   const hasPrev = useMemo(() => {
     return current > 0;

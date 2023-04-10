@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import _ from "lodash-es";
 
-interface useDebouncedScrollDirection {
+interface useDebouncedScrollDirectionArgs {
   /**
    * 위로 스크롤 하게 되면 실행할 콜백을 설정합니다.
    */
@@ -32,18 +32,21 @@ export function useDebouncedScrollDirection({
   downScrollCallback,
   preventDefault,
   debounceDelay = 1000,
-}: useDebouncedScrollDirection) {
+}: useDebouncedScrollDirectionArgs) {
   const [scrollDir, setScrollDir] = useState<"up" | "down" | "">("");
+  const [touchStart, setTouchStart] = useState(0);
 
   useEffect(() => {
     const debounce = _.debounce((direction: string) => {
       if (direction === "down") {
+        console.log("down");
         if (downScrollCallback) {
           downScrollCallback();
         }
       }
 
       if (direction === "up") {
+        console.log("up");
         if (upScrollCallback) {
           upScrollCallback();
         }
@@ -63,12 +66,36 @@ export function useDebouncedScrollDirection({
       }
     };
 
+    const onSetTouchStart = (e: TouchEvent) => {
+      setTouchStart(e.changedTouches[0].clientY);
+    };
+
+    const handleMobileScroll = (e: TouchEvent) => {
+      if (preventDefault) {
+        e.preventDefault();
+      }
+
+      if (e.changedTouches[0].clientY < touchStart) {
+        debounce("down");
+        setScrollDir("down");
+      } else if (e.changedTouches[0].clientY > touchStart) {
+        debounce("up");
+        setScrollDir("up");
+      }
+    };
+
     window.addEventListener("wheel", handleScroll, { passive: false });
+    window.addEventListener("touchmove", handleMobileScroll, {
+      passive: false,
+    });
+    window.addEventListener("touchstart", onSetTouchStart, { passive: false });
 
     return () => {
       window.removeEventListener("wheel", handleScroll);
+      window.removeEventListener("touchmove", handleMobileScroll);
+      window.removeEventListener("touchstart", onSetTouchStart);
     };
-  }, [upScrollCallback, downScrollCallback]);
+  }, [upScrollCallback, downScrollCallback, touchStart]);
 
   return scrollDir;
 }

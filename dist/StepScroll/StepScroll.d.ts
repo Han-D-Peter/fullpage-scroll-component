@@ -4,7 +4,7 @@ interface StepScrollProps {
     children: ReactElement<typeof Page>[];
     defaultPage?: number;
 }
-interface HandleScroll {
+export interface HandleScroll {
     /**
      * 현재 페이지 번호를 나타냅니다.
      */
