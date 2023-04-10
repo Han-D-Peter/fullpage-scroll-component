@@ -1,6 +1,6 @@
 {
   "name": "fullpage-scroll-component",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "author": {
     "name": "Han-D-Peter",
     "email": "jaesung.sound@gmail.com"
@@ -10,6 +10,7 @@
     "type": "git",
     "url": "git://github.com/Han-D-Peter/fullpage-scroll-component.git"
   },
+  "homepage": "https://dulcet-fairy-055d1f.netlify.app/",
   "license": "MIT",
   "keywords": [
     "Scroll",
