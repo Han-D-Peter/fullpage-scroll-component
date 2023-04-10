@@ -15,12 +15,12 @@ import { useSuccessiveValue } from "./hooks/useSuccessiveValue";
 import { StepScrollContext } from "./hooks/useStepScroll";
 import DebouncedScroll from "./DebouncedScroll";
 var StepScroll = forwardRef(function (_a, ref) {
-    var children = _a.children, _b = _a.defaultPage, defaultPage = _b === void 0 ? 0 : _b;
-    var _c = useState([]), pagesIdArray = _c[0], setPagesIdArray = _c[1];
-    var _d = useSuccessiveValue({
+    var children = _a.children, _b = _a.defaultPage, defaultPage = _b === void 0 ? 0 : _b, _c = _a.delay, delay = _c === void 0 ? 300 : _c, _d = _a.isPreventDefault, isPreventDefault = _d === void 0 ? true : _d;
+    var _e = useState([]), pagesIdArray = _e[0], setPagesIdArray = _e[1];
+    var _f = useSuccessiveValue({
         maximum: children.length - 1,
         defaultNumber: defaultPage >= children.length ? 0 : defaultPage,
-    }), current = _d.current, setCurrent = _d.setCurrent, resetCurrent = _d.resetCurrent, next = _d.next, prev = _d.prev, hasNext = _d.hasNext, hasPrev = _d.hasPrev, move = _d.move;
+    }), current = _f.current, setCurrent = _f.setCurrent, resetCurrent = _f.resetCurrent, next = _f.next, prev = _f.prev, hasNext = _f.hasNext, hasPrev = _f.hasPrev, move = _f.move;
     var providerValues = useMemo(function () { return ({
         pagesIdArray: pagesIdArray,
         setPagesIdArray: setPagesIdArray,
@@ -51,6 +51,6 @@ var StepScroll = forwardRef(function (_a, ref) {
         movePage: move,
         resetCurrentPage: resetCurrent,
     }); });
-    return (_jsxs(StepScrollContext.Provider, __assign({ value: providerValues }, { children: [_jsx(DebouncedScroll, {}), children] })));
+    return (_jsxs(StepScrollContext.Provider, __assign({ value: providerValues }, { children: [_jsx(DebouncedScroll, { isPreventDefault: isPreventDefault, delay: delay }), children] })));
 });
 export default StepScroll;

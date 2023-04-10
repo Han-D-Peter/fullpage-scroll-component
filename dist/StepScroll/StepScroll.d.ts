@@ -3,6 +3,8 @@ import Page from "./Page";
 interface StepScrollProps {
     children: ReactElement<typeof Page>[];
     defaultPage?: number;
+    isPreventDefault?: boolean;
+    delay?: number;
 }
 export interface HandleScroll {
     /**

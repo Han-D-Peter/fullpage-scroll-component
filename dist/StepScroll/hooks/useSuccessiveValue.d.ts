@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-interface useSuccessiveValue {
+interface useSuccessiveValueArgs {
     /**
      * 시작 숫자를 지정합니다.
      */
@@ -44,5 +44,5 @@ interface useSuccessiveValueReturnType {
      */
     move: (to: number) => void;
 }
-export declare const useSuccessiveValue: ({ defaultNumber, maximum, }: useSuccessiveValue) => useSuccessiveValueReturnType;
+export declare const useSuccessiveValue: ({ defaultNumber, maximum, }: useSuccessiveValueArgs) => useSuccessiveValueReturnType;
 export {};

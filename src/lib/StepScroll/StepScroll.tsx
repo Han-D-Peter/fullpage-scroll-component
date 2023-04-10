@@ -14,7 +14,7 @@ import DebouncedScroll from "./DebouncedScroll";
 interface StepScrollProps {
   children: ReactElement<typeof Page>[];
   defaultPage?: number;
-  preventDefault?: boolean;
+  isPreventDefault?: boolean;
   delay?: number;
 }
 
@@ -109,7 +109,7 @@ const StepScroll = forwardRef(function (
 
   return (
     <StepScrollContext.Provider value={providerValues}>
-      <DebouncedScroll preventDefault={isPreventDefault} delay={delay} />
+      <DebouncedScroll isPreventDefault={isPreventDefault} delay={delay} />
       {children}
     </StepScrollContext.Provider>
   );

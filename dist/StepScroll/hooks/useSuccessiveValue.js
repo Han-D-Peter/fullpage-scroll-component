@@ -11,7 +11,7 @@ export var useSuccessiveValue = function (_a) {
             return;
         }
         setCurrent(function (prev) { return ++prev; });
-    }, [current]);
+    }, [current, maximum]);
     var prev = useCallback(function () {
         if (current <= 0) {
             return;
@@ -20,7 +20,7 @@ export var useSuccessiveValue = function (_a) {
     }, [current]);
     var hasNext = useMemo(function () {
         return current < maximum;
-    }, [current]);
+    }, [current, maximum]);
     var hasPrev = useMemo(function () {
         return current > 0;
     }, [current]);
