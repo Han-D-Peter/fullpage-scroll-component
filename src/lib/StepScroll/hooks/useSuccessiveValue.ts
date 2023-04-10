@@ -74,7 +74,6 @@ export const useSuccessiveValue = ({
   }, []);
 
   const next = useCallback(() => {
-    console.log("next");
     if (current >= maximum) {
       return;
     }
@@ -82,7 +81,6 @@ export const useSuccessiveValue = ({
   }, [current, maximum]);
 
   const prev = useCallback(() => {
-    console.log("prev");
     if (current <= 0) {
       return;
     }

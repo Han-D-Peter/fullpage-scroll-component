@@ -17,7 +17,7 @@ interface useDebouncedScrollDirectionArgs {
    * @default
    * preventDefault의 기본 값은 false 입니다.
    */
-  preventDefault?: boolean;
+  isPreventDefault?: boolean;
 
   /**
    * 스크롤에 따른 콜백 실행까지 지연되는 디바운스 시간을 설정합니다.
@@ -30,7 +30,7 @@ interface useDebouncedScrollDirectionArgs {
 export function useDebouncedScrollDirection({
   upScrollCallback,
   downScrollCallback,
-  preventDefault,
+  isPreventDefault,
   debounceDelay = 1000,
 }: useDebouncedScrollDirectionArgs) {
   const [scrollDir, setScrollDir] = useState<"up" | "down" | "">("");
@@ -39,14 +39,12 @@ export function useDebouncedScrollDirection({
   useEffect(() => {
     const debounce = _.debounce((direction: string) => {
       if (direction === "down") {
-        console.log("down");
         if (downScrollCallback) {
           downScrollCallback();
         }
       }
 
       if (direction === "up") {
-        console.log("up");
         if (upScrollCallback) {
           upScrollCallback();
         }
@@ -54,7 +52,7 @@ export function useDebouncedScrollDirection({
     }, debounceDelay);
 
     const handleScroll = (e: WheelEvent) => {
-      if (preventDefault) {
+      if (isPreventDefault) {
         e.preventDefault();
       }
       if (e.deltaY > 0) {
@@ -71,7 +69,7 @@ export function useDebouncedScrollDirection({
     };
 
     const handleMobileScroll = (e: TouchEvent) => {
-      if (preventDefault) {
+      if (isPreventDefault) {
         e.preventDefault();
       }
 

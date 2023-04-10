@@ -5,6 +5,10 @@
 `fullpage-scroll-component`는 `StepScroll` 컴포넌트와 `useStepScroll` 훅 하나를 제공합니다.
 
 - `StepScroll` 컴포넌트는 스크롤 구역을 설정할 때 사용합니다. `Page`의 도움을 받습니다.
+- `StepScroll` 컴포넌트는 세가지 프랍스를 넘겨받습니다.
+  - `defaultPage`: 화면에 위치시킬 디폴트 페이지를 설정합니다.(0보다 크고 전체 페이지 갯수와 같거나 작은 수로 설정, default is 0)
+  - `delay`: 화면이 넘어가는 딜레이를 조정합니다 (default is 300, 단위 ms)
+  - `isPreventDefault`: 스크롤을 막는 설정값입니다. (default is true)
 
 ```typescript
 function App() {
@@ -25,8 +29,6 @@ function App() {
 ```
 
 - `StepScroll`컴포넌트 하위에선 `useStepScroll` 훅을 통해 스크롤 조작이 가능합니다.
-- `useStepScroll`의 인자로 넣어주는 값은 아래와 같습니다.
-  - `defaultPage`: 처음 화면에 띄워줄 페이지 번호(0보다 작을 수 없고, 전체 길이보다 클 수 없습니다 -> 예외시 기본값 0)
 - `useStepScroll`이 반환하는 값은 아래와 같습니다.
   - `currentPage`: 현재 화면에 보이는 페이지 번호.
   - `resetCurrent`: 훅을 불러올때 입력했던 디폴트 페이지 번호로 초기화 합니다.
@@ -65,7 +67,7 @@ function FirstCustomComponent() {
     nextPage,
     prevPage,
     movePage,
-  } = useStepScroll({ defaultPage: 0 });
+  } = useStepScroll();
   return (
     <div>
       {hasPrevPage && <button onClick={prevPage}>Prev</button>} // 이전 페이지ㅣ
