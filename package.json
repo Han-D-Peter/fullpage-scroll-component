@@ -1,6 +1,6 @@
 {
   "name": "fullpage-scroll-component",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "author": {
     "name": "Han-D-Peter",
     "email": "jaesung.sound@gmail.com"
@@ -17,26 +17,19 @@
     "Step Scroll",
     "Scroll Component"
   ],
-  "private": false,
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "browser": "./browser/specific/main.js",
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.23",
-    "@types/react": "^18.0.33",
-    "@types/react-dom": "^18.0.11",
     "lodash-es": "^4.17.21",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
-    "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -64,6 +57,29 @@
     ]
   },
   "devDependencies": {
-    "@types/lodash-es": "^4.17.7"
+    "@babel/core": "^7.21.4",
+    "@babel/plugin-transform-modules-commonjs": "^7.21.2",
+    "@babel/preset-env": "^7.21.4",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.5.2",
+    "@types/lodash": "^4.14.192",
+    "@types/lodash-es": "^4.17.7",
+    "@types/node": "^16.18.23",
+    "@types/react": "^18.0.33",
+    "@types/react-dom": "^18.0.11",
+    "babel-jest": "^29.5.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "lodash": "^4.17.21",
+    "react-test-renderer": "^18.2.0",
+    "@types/react-test-renderer": "^18.0.0",
+    "typescript": "^4.9.5"
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "<rootDir>/node_modules/(?!lodash-es)"
+    ]
   }
 }

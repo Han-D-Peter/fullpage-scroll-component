@@ -217,7 +217,7 @@ function FirstCustomComponent() {
     nextPage,
     prevPage,
     movePage,
-  } = useStepScroll({ defaultPage: 0 });
+  } = useStepScroll();
   return <div></div>;
 }
 ```
