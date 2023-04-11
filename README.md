@@ -114,28 +114,28 @@ function App() {
       </StepScroll>
       <button
         onClick={() => {
-          ref.current.next();
+          ref.current.nextPage();
         }}
       >
         Next Page
       </button>
       <button
         onClick={() => {
-          ref.current.next();
+          ref.current.prevPage();
         }}
       >
         Prev Page
       </button>
       <button
         onClick={() => {
-          ref.current.move(2);
+          ref.current.movePage(2);
         }}
       >
         Move to 2page
       </button>
       <button
         onClick={() => {
-          ref.current.resetCurrent();
+          ref.current.resetCurrentPage();
         }}
       >
         To the first screen
@@ -273,28 +273,28 @@ function App() {
       </StepScroll>
       <button
         onClick={() => {
-          ref.current.next();
+          ref.current.nextPage();
         }}
       >
         다음페이지
       </button>
       <button
         onClick={() => {
-          ref.current.next();
+          ref.current.prevPage();
         }}
       >
         이전페이지
       </button>
       <button
         onClick={() => {
-          ref.current.move(2);
+          ref.current.movePage(2);
         }}
       >
         2페이지로 이동
       </button>
       <button
         onClick={() => {
-          ref.current.resetCurrent();
+          ref.current.resetCurrentPage();
         }}
       >
         처음화면으로
