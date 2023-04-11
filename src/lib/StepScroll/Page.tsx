@@ -1,11 +1,9 @@
-import { ReactNode, useEffect, useId, useRef } from "react";
+import { HTMLAttributes, useEffect, useId, useRef } from "react";
 import { useDidUpdate } from "./hooks/useDidUpdate";
 import { useStepScroll } from "./hooks/useStepScroll";
 import styled from "@emotion/styled";
 
-interface PageProps {
-  children: ReactNode;
-}
+type PageProps = HTMLAttributes<HTMLDivElement> & {};
 
 const PageContainer = styled.div`
   width: 100vw;
@@ -16,7 +14,7 @@ const PageContainer = styled.div`
  * @description
  * StepScroll 컴포넌트의 children으로만 사용할 수 있는 컴포넌트 입니다.
  */
-function Page({ children }: PageProps) {
+function Page({ children, ...args }: PageProps) {
   const { pagesIdArray, setPagesIdArray, currentPage } = useStepScroll();
   const ref = useRef<HTMLDivElement>(null);
   const id = useId();
@@ -46,7 +44,7 @@ function Page({ children }: PageProps) {
   }, [ref, currentPage, pagesIdArray, id]);
 
   return (
-    <PageContainer id={id} ref={ref}>
+    <PageContainer id={id} ref={ref} {...args}>
       {children}
     </PageContainer>
   );
