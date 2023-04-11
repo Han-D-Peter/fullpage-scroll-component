@@ -15,7 +15,7 @@ function App() {
         <button onClick={() => ref.current?.prevPage()}>prev</button>
         <button onClick={() => ref.current?.nextPage()}>next</button>
       </div>
-      <StepScroll ref={ref}>
+      <StepScroll ref={ref} isScrollabled={false}>
         <Page>
           <FirstComponent />
         </Page>

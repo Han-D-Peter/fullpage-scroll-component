@@ -14,7 +14,9 @@ This component form React(not support SSR yet. but you can import this component
 
   - `delay`: Adjust the delay after which the screen flips (default is 300, units ms)
 
-  - `isPreventDefault`: Setting to prevent scrolling. (default is true)
+    - `isScrollabled`: Turn on/off scrolling to move on to the next page.(default is true)
+
+  - `isPreventDefault`: Setting to prevent scrolling. When `isScrollable` is `false`, `isPreventDefault` is also automatically `false`(default is true)
 
 ```typescript
 function App() {
@@ -173,7 +175,9 @@ function App() {
 
   - `delay`: 화면이 넘어가는 딜레이를 조정합니다 (default is 300, 단위 ms)
 
-  - `isPreventDefault`: 스크롤을 막는 설정값입니다. (default is true)
+  - `isScrollabled`: 스크롤로 이전/다음 페이지로 넘어가는 기능을 on/off 합니다.(default is true)
+
+  - `isPreventDefault`: 스크롤을 막는 설정값입니다. `isScrollabled`가 `false`일때 `isPreventDefault` 또한 자동으로 `false` 입니다.(default is true)
 
 ```typescript
 function App() {

@@ -2,6 +2,7 @@ import {
   ForwardedRef,
   ReactElement,
   forwardRef,
+  useEffect,
   useImperativeHandle,
   useMemo,
   useState,
@@ -14,6 +15,7 @@ import DebouncedScroll from "./DebouncedScroll";
 interface StepScrollProps {
   children: ReactElement<typeof Page>[];
   defaultPage?: number;
+  isScrollabled?: boolean;
   isPreventDefault?: boolean;
   delay?: number;
 }
@@ -54,6 +56,7 @@ const StepScroll = forwardRef(function (
     defaultPage = 0,
     delay = 300,
     isPreventDefault = true,
+    isScrollabled = true,
   }: StepScrollProps,
   ref: ForwardedRef<HandleScroll>
 ) {
@@ -107,9 +110,35 @@ const StepScroll = forwardRef(function (
     resetCurrentPage: resetCurrent,
   }));
 
+  const handleScroll = (e: WheelEvent) => {
+    e.preventDefault();
+  };
+
+  const handleMobileScroll = (e: TouchEvent) => {
+    e.preventDefault();
+  };
+
+  useEffect(() => {
+    if (!isScrollabled) {
+      window.addEventListener("wheel", handleScroll, { passive: false });
+      window.addEventListener("touchmove", handleMobileScroll, {
+        passive: false,
+      });
+    }
+
+    return () => {
+      if (!isScrollabled) {
+        window.removeEventListener("wheel", handleScroll);
+        window.removeEventListener("touchmove", handleMobileScroll);
+      }
+    };
+  }, [isScrollabled]);
+
   return (
     <StepScrollContext.Provider value={providerValues}>
-      <DebouncedScroll isPreventDefault={isPreventDefault} delay={delay} />
+      {isScrollabled && (
+        <DebouncedScroll isPreventDefault={isPreventDefault} delay={delay} />
+      )}
       {children}
     </StepScrollContext.Provider>
   );

@@ -39,13 +39,13 @@ export function useDebouncedScrollDirection({
   useEffect(() => {
     const debounce = _.debounce((direction: string) => {
       if (direction === "down") {
-        if (downScrollCallback) {
+        if (downScrollCallback && isPreventDefault) {
           downScrollCallback();
         }
       }
 
       if (direction === "up") {
-        if (upScrollCallback) {
+        if (upScrollCallback && isPreventDefault) {
           upScrollCallback();
         }
       }
