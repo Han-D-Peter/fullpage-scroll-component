@@ -14,7 +14,7 @@ This component form React(not support SSR yet. but you can import this component
 
   - `delay`: Adjust the delay after which the screen flips (default is 300, units ms)
 
-    - `isScrollabled`: Turn on/off scrolling to move on to the next page.(default is true)
+  - `isScrollabled`: Turn on/off scrolling to move on to the next page.(default is true)
 
   - `isPreventDefault`: Setting to prevent scrolling. When `isScrollable` is `false`, `isPreventDefault` is also automatically `false`(default is true)
 
