@@ -1,5 +1,7 @@
 # fullpage-scroll-component(Eng)
 
+This component form React(not support SSR yet. but you can import this component by `dynamic' import with `{ ssr: false }`option in Next.js)
+
 ## **How to use([Example](https://dulcet-fairy-055d1f.netlify.app/))**
 
 `fullpage-scroll-component` provides a `StepScroll` component and one `useStepScroll` hook.
@@ -156,6 +158,8 @@ function App() {
   - `resetCurrentPage`: Function to return to the first (default or 0th) screen.
 
 # fullpage-scroll-component(한글)
+
+이 컴포넌트는 React 를 위한 컴포넌트 입니다. (SSR은 아직 지원하지 않습니다. next.js 에서 `dynamic`임포트를 { ssr: false } 옵션으로 사용할 수 있습니다. )
 
 ## **사용방법([Example](https://dulcet-fairy-055d1f.netlify.app/))**
 
