@@ -18,6 +18,7 @@ interface StepScrollProps {
   isScrollabled?: boolean;
   isPreventDefault?: boolean;
   delay?: number;
+  isCaptured?: boolean;
 }
 
 export interface HandleScroll {
@@ -57,6 +58,7 @@ const StepScroll = forwardRef(function (
     delay = 300,
     isPreventDefault = true,
     isScrollabled = true,
+    isCaptured = true,
   }: StepScrollProps,
   ref: ForwardedRef<HandleScroll>
 ) {
@@ -120,9 +122,13 @@ const StepScroll = forwardRef(function (
 
   useEffect(() => {
     if (!isScrollabled) {
-      window.addEventListener("wheel", handleScroll, { passive: false });
+      window.addEventListener("wheel", handleScroll, {
+        passive: false,
+        capture: isCaptured,
+      });
       window.addEventListener("touchmove", handleMobileScroll, {
         passive: false,
+        capture: isCaptured,
       });
     }
 
