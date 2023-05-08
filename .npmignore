@@ -3,3 +3,4 @@ src/
 public/
 build/
 tsconfig.json
+rollup.config.mjs

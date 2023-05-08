@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import _ from "lodash-es";
+import debounce from "lodash/debounce";
 
 interface useDebouncedScrollDirectionArgs {
   /**
@@ -37,7 +37,7 @@ export function useDebouncedScrollDirection({
   const [touchStart, setTouchStart] = useState(0);
 
   useEffect(() => {
-    const debounce = _.debounce((direction: string) => {
+    const debouncedScroll = debounce((direction: string) => {
       if (direction === "down") {
         if (downScrollCallback && isPreventDefault) {
           downScrollCallback();
@@ -56,10 +56,10 @@ export function useDebouncedScrollDirection({
         e.preventDefault();
       }
       if (e.deltaY > 0) {
-        debounce("down");
+        debouncedScroll("down");
         setScrollDir("down");
       } else if (e.deltaY < 0) {
-        debounce("up");
+        debouncedScroll("up");
         setScrollDir("up");
       }
     };
@@ -74,10 +74,10 @@ export function useDebouncedScrollDirection({
       }
 
       if (e.changedTouches[0].clientY < touchStart) {
-        debounce("down");
+        debouncedScroll("down");
         setScrollDir("down");
       } else if (e.changedTouches[0].clientY > touchStart) {
-        debounce("up");
+        debouncedScroll("up");
         setScrollDir("up");
       }
     };
