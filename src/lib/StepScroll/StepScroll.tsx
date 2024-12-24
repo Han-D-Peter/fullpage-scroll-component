@@ -130,15 +130,13 @@ const StepScroll = forwardRef(function (
         passive: false,
         capture: isCaptured,
       });
-    }
 
-    return () => {
-      if (!isScrollabled) {
+      return () => {
         window.removeEventListener("wheel", handleScroll);
         window.removeEventListener("touchmove", handleMobileScroll);
-      }
-    };
-  }, [isScrollabled]);
+      };
+    }
+  }, [isCaptured, isScrollabled]);
 
   return (
     <StepScrollContext.Provider value={providerValues}>
