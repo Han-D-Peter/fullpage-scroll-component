@@ -38,13 +38,15 @@ interface useSuccessiveValueReturnType {
 
   /**
    * 다음 번호로 변화시키는 함수입니다.
+   * @returns 함수가 실행된 이후 인덱스 값을 반환합니다.
    */
-  next: () => void;
+  next: () => number;
 
   /**
    * 이전 번호로 변화시키는 함수입니다.
+   * @returns 함수가 실행된 이후 인덱스 값을 반환합니다.
    */
-  prev: () => void;
+  prev: () => number;
 
   /**
    * 다음 번호가 있는지 여부를 나타냅니다.
@@ -75,16 +77,18 @@ export const useSuccessiveValue = ({
 
   const next = useCallback(() => {
     if (current >= maximum) {
-      return;
+      return current;
     }
     setCurrent((prev) => ++prev);
+    return current + 1;
   }, [current, maximum]);
 
   const prev = useCallback(() => {
     if (current <= 0) {
-      return;
+      return current;
     }
     setCurrent((prev) => --prev);
+    return current - 1;
   }, [current]);
 
   const hasNext = useMemo(() => {
