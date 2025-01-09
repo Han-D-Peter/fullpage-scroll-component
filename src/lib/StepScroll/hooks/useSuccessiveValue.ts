@@ -20,7 +20,7 @@ interface useSuccessiveValueArgs {
   maximum: number;
 }
 
-interface useSuccessiveValueReturnType {
+export interface useSuccessiveValueReturnType {
   /**
    * 현재 번호 입니다.
    */
